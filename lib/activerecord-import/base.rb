@@ -22,11 +22,12 @@ module ActiveRecord::Import
   def self.require_adapter(adapter)
     base_adapter = base_adapter(adapter)
     unless base_adapter.blank?
-      require File.join(AdapterPath,"/abstract_adapter")
-    begin
-      require File.join(ADAPTER_PATH, "/#{base_adapter(adapter)}_adapter")
-    rescue LoadError
-      # fallback
+      require File.join(ADAPTER_PATH, "/abstract_adapter")
+      begin
+        require File.join(ADAPTER_PATH, "/#{base_adapter(adapter)}_adapter")
+      rescue LoadError
+        # fallback
+      end
     end
   end
 
